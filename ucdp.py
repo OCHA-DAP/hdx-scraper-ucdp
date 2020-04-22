@@ -8,17 +8,12 @@ Generates HXlated API urls from the UCDP website.
 
 """
 import logging
-from collections import OrderedDict
-from copy import deepcopy
-from os.path import join
-from urllib.parse import quote_plus
+from datetime import datetime
 
 from hdx.data.dataset import Dataset
-from hdx.data.resource import Resource
-from hdx.data.resource_view import ResourceView
 from hdx.data.showcase import Showcase
 from hdx.location.country import Country
-from hdx.utilities.dictandlist import write_list_to_csv, dict_of_lists_add
+from hdx.utilities.dictandlist import dict_of_lists_add
 from slugify import slugify
 
 logger = logging.getLogger(__name__)
@@ -64,7 +59,7 @@ def generate_dataset_and_showcase(folder, country, countrydata, headers):
     })
     dataset.set_maintainer('196196be-6037-4488-8b71-d786adf4c081')
     dataset.set_organization('hdx')
-    dataset.set_expected_update_frequency('As needed')
+    dataset.set_expected_update_frequency('Every day')
     dataset.set_subnational(True)
     dataset.add_country_location(countryiso)
     tags = ['hxl', 'violence and conflict', 'protests', 'security incidents']
@@ -76,17 +71,16 @@ def generate_dataset_and_showcase(folder, country, countrydata, headers):
         'description': 'Conflict data with HXL tags'
     }
 
-    def process_year(years, row):
-        start_year = int(row['date_start'][:4])
-        end_year = int(row['date_end'][:4])
-        years.add(start_year)
-        years.add(end_year)
-        row['start_year'] = start_year
-        row['end_year'] = end_year
+    def process_dates(row):
+        startdate = datetime.strptime(row['date_start'], '%Y-%m-%d')
+        enddate = datetime.strptime(row['date_end'], '%Y-%m-%d')
+        row['start_year'] = startdate.year
+        row['end_year'] = enddate.year
+        return {'startdate': startdate, 'enddate': enddate}
 
     quickcharts = {'cutdown': 2, 'cutdownhashtags': ['#date+year+end', '#adm1+name', '#affected+killed']}
     success, results = dataset.generate_resource_from_download(headers, countrydata, hxltags, folder, filename,
-                                                               resourcedata, year_function=process_year,
+                                                               resourcedata, date_function=process_dates,
                                                                quickcharts=quickcharts)
     if success is False:
         logger.warning('%s has no data!' % countryname)

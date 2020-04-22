@@ -29,13 +29,14 @@ def main():
     with Download() as downloader:
         countries, headers, countriesdata = get_countriesdata(download_url, downloader)
         logger.info('Number of countries: %d' % len(countriesdata))
-        for folder, country in progress_storing_tempdir('UCDP', countries, 'iso3'):
+        for info, country in progress_storing_tempdir('UCDP', countries, 'iso3'):
+            folder = info['folder']
             dataset, showcase = generate_dataset_and_showcase(folder, country, countriesdata[country['iso3']], headers)
             if dataset:
                 dataset.update_from_yaml()
                 dataset['notes'] = dataset['notes'].replace('\n', '  \n')  # ensure markdown has line breaks
                 dataset.generate_resource_view(1)
-                dataset.create_in_hdx(remove_additional_resources=True, hxl_update=False, updated_by_script='HDX Scraper: UCDP')
+                dataset.create_in_hdx(remove_additional_resources=True, hxl_update=False, updated_by_script='HDX Scraper: UCDP', batch=info['batch'])
                 showcase.create_in_hdx()
                 showcase.add_dataset(dataset)
 

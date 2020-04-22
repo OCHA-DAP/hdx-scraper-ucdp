@@ -20,13 +20,13 @@ from ucdp import generate_dataset_and_showcase, get_countriesdata
 
 class TestUCDP():
     dataset = {'name': 'ucdp-data-for-bangladesh', 'title': 'Bangladesh - Conflict Data',
-               'maintainer': '196196be-6037-4488-8b71-d786adf4c081', 'owner_org': 'hdx', 'data_update_frequency': '-2',
+               'maintainer': '196196be-6037-4488-8b71-d786adf4c081', 'owner_org': 'hdx', 'data_update_frequency': '1',
                'subnational': '1', 'groups': [{'name': 'bgd'}],
                'tags': [{'name': 'hxl', 'vocabulary_id': '4e61d464-4943-4e97-973a-84673c1aaa87'},
                         {'name': 'violence and conflict', 'vocabulary_id': '4e61d464-4943-4e97-973a-84673c1aaa87'},
                         {'name': 'protests', 'vocabulary_id': '4e61d464-4943-4e97-973a-84673c1aaa87'},
                         {'name': 'security incidents', 'vocabulary_id': '4e61d464-4943-4e97-973a-84673c1aaa87'}],
-               'dataset_date': '01/01/1989-12/31/2018'}
+               'dataset_date': '05/20/1989-12/30/2018'}
 
     resources = [{'name': 'Conflict Data for Bangladesh', 'description': 'Conflict data with HXL tags', 'format': 'csv',
                   'resource_type': 'file.upload', 'url_type': 'upload'},
