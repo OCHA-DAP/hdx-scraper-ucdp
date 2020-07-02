@@ -50,7 +50,7 @@ def generate_dataset_and_showcase(folder, country, countrydata, headers):
     """
     countryiso = country['iso3']
     countryname = country['countryname']
-    title = '%s - Conflict Data' % countryname
+    title = '%s - Data on Conflict Events' % countryname
     logger.info('Creating dataset: %s' % title)
     slugified_name = slugify('UCDP Data for %s' % countryname).lower()
     dataset = Dataset({
@@ -59,7 +59,7 @@ def generate_dataset_and_showcase(folder, country, countrydata, headers):
     })
     dataset.set_maintainer('196196be-6037-4488-8b71-d786adf4c081')
     dataset.set_organization('hdx')
-    dataset.set_expected_update_frequency('Every day')
+    dataset.set_expected_update_frequency('Every month')
     dataset.set_subnational(True)
     dataset.add_country_location(countryiso)
     tags = ['hxl', 'violence and conflict', 'protests', 'security incidents']
@@ -79,7 +79,7 @@ def generate_dataset_and_showcase(folder, country, countrydata, headers):
         return {'startdate': startdate, 'enddate': enddate}
 
     quickcharts = {'cutdown': 2, 'cutdownhashtags': ['#date+year+end', '#adm1+name', '#affected+killed']}
-    success, results = dataset.generate_resource_from_download(headers, countrydata, hxltags, folder, filename,
+    success, results = dataset.generate_resource_from_iterator(headers, countrydata, hxltags, folder, filename,
                                                                resourcedata, date_function=process_dates,
                                                                quickcharts=quickcharts)
     if success is False:

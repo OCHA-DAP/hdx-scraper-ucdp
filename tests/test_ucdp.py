@@ -19,8 +19,8 @@ from ucdp import generate_dataset_and_showcase, get_countriesdata
 
 
 class TestUCDP():
-    dataset = {'name': 'ucdp-data-for-bangladesh', 'title': 'Bangladesh - Conflict Data',
-               'maintainer': '196196be-6037-4488-8b71-d786adf4c081', 'owner_org': 'hdx', 'data_update_frequency': '1',
+    dataset = {'name': 'ucdp-data-for-bangladesh', 'title': 'Bangladesh - Data on Conflict Events',
+               'maintainer': '196196be-6037-4488-8b71-d786adf4c081', 'owner_org': 'hdx', 'data_update_frequency': '30',
                'subnational': '1', 'groups': [{'name': 'bgd'}],
                'tags': [{'name': 'hxl', 'vocabulary_id': '4e61d464-4943-4e97-973a-84673c1aaa87'},
                         {'name': 'violence and conflict', 'vocabulary_id': '4e61d464-4943-4e97-973a-84673c1aaa87'},
@@ -28,10 +28,10 @@ class TestUCDP():
                         {'name': 'security incidents', 'vocabulary_id': '4e61d464-4943-4e97-973a-84673c1aaa87'}],
                'dataset_date': '05/20/1989-12/30/2018'}
 
-    resources = [{'name': 'Conflict Data for Bangladesh', 'description': 'Conflict data with HXL tags', 'format': 'csv',
+    resources = [{'name': 'Conflict Data for Bangladesh', 'description': 'Conflict data with HXL tags', 'format': 'CSV',
                   'resource_type': 'file.upload', 'url_type': 'upload'},
                  {'name': 'QuickCharts-Conflict Data for Bangladesh',
-                  'description': 'Cut down data for QuickCharts', 'format': 'csv',
+                  'description': 'Cut down data for QuickCharts', 'format': 'CSV',
                   'resource_type': 'file.upload', 'url_type': 'upload'}]
 
     @pytest.fixture(scope='function')
@@ -69,7 +69,7 @@ class TestUCDP():
             file = 'qc_conflict_data_BGD.csv'
             assert_files_same(join('tests', 'fixtures', file), join(folder, file))
 
-            assert showcase == {'name': 'ucdp-data-for-bangladesh-showcase', 'title': 'Bangladesh - Conflict Data',
+            assert showcase == {'name': 'ucdp-data-for-bangladesh-showcase', 'title': 'Bangladesh - Data on Conflict Events',
                                 'notes': 'Conflict Data Dashboard for Bangladesh',
                                 'url': 'https://ucdp.uu.se/#country/771',
                                 'image_url': 'https://pbs.twimg.com/profile_images/832251660718178304/y-LWa5iK_200x200.jpg',
