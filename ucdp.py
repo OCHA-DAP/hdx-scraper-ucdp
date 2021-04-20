@@ -25,6 +25,9 @@ hxltags = {'year': '#date+year', 'start_year': '#date+year+start', 'end_year': '
            'best': '#affected+killed'}
 
 
+dateformat = '%Y-%m-%d %H:%M:%S.%f'
+
+
 def get_countriesdata(download_url, downloader):
     countrynameisomapping = dict()
     countriesdata = dict()
@@ -72,8 +75,8 @@ def generate_dataset_and_showcase(folder, country, countrydata, headers):
     }
 
     def process_dates(row):
-        startdate = datetime.strptime(row['date_start'], '%Y-%m-%d')
-        enddate = datetime.strptime(row['date_end'], '%Y-%m-%d')
+        startdate = datetime.strptime(row['date_start'], dateformat)
+        enddate = datetime.strptime(row['date_end'], dateformat)
         row['start_year'] = startdate.year
         row['end_year'] = enddate.year
         return {'startdate': startdate, 'enddate': enddate}
