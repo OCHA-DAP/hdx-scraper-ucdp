@@ -7,19 +7,17 @@ Generates HXlated API urls from the UCDP website.
 
 """
 import logging
-from datetime import datetime
 
 from hdx.data.dataset import Dataset
 from hdx.data.showcase import Showcase
 from hdx.location.country import Country
+from hdx.utilities.dateparse import parse_date
 from hdx.utilities.dictandlist import dict_of_lists_add
 from slugify import slugify
 
 logger = logging.getLogger(__name__)
 hxltags = {
     "year": "#date+year",
-    "start_year": "#date+year+start",
-    "end_year": "#date+year+end",
     "side_a": "#group+name+first",
     "side_b": "#group+name+second",
     "source_article": "#meta+source",
@@ -38,14 +36,11 @@ hxltags = {
 }
 
 
-dateformat = "%Y-%m-%d"
-
-
 def get_countriesdata(download_url, downloader):
     countrynameisomapping = dict()
     countriesdata = dict()
     headers, iterator = downloader.get_tabular_rows(
-        download_url, headers=1, dict_form=True
+        download_url, headers=1, dict_form=True, format="csv"
     )
     countries = list()
     for row in iterator:
@@ -55,6 +50,9 @@ def get_countriesdata(download_url, downloader):
             countryiso, _ = Country.get_iso3_country_code_fuzzy(
                 countryname, exception=ValueError
             )
+            if not countryiso:
+                logger.warning(f"No ISO 3 code found for {countryname}!")
+                continue
             countrynameisomapping[countryname] = countryiso
             countries.append(
                 {
@@ -65,9 +63,12 @@ def get_countriesdata(download_url, downloader):
             )
         row["iso3"] = countryiso
         dict_of_lists_add(countriesdata, countryiso, row)
-    headers.insert(30, "iso3")
-    headers.insert(3, "end_year")
-    headers.insert(3, "start_year")
+    index = None
+    for i, header in enumerate(headers):
+        if header == "country":
+            index = i + 1
+            break
+    headers.insert(index, "iso3")
     return countries, headers, countriesdata
 
 
@@ -99,15 +100,13 @@ def generate_dataset_and_showcase(folder, country, countrydata, headers):
     }
 
     def process_dates(row):
-        startdate = datetime.strptime(row["date_start"], dateformat)
-        enddate = datetime.strptime(row["date_end"], dateformat)
-        row["start_year"] = startdate.year
-        row["end_year"] = enddate.year
+        startdate = parse_date(row["date_start"])
+        enddate = parse_date(row["date_end"])
         return {"startdate": startdate, "enddate": enddate}
 
     quickcharts = {
         "cutdown": 2,
-        "cutdownhashtags": ["#date+year+end", "#adm1+name", "#affected+killed"],
+        "cutdownhashtags": ["#date+year", "#adm1+name", "#affected+killed"],
     }
     success, results = dataset.generate_resource_from_iterator(
         headers,

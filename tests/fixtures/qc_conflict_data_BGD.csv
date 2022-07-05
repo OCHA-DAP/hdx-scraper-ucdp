@@ -1,5 +1,5 @@
-end_year,adm_1,best
-#date+year+end,#adm1+name,#affected+killed
+year,adm_1,best
+#date+year,#adm1+name,#affected+killed
 2013,Barisāl Division,1
 1989,Chittagong Division,6
 1991,,1

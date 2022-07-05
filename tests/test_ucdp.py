@@ -6,9 +6,9 @@ Unit tests for UCDP
 from os.path import join
 
 import pytest
+from hdx.api.configuration import Configuration
+from hdx.api.locations import Locations
 from hdx.data.vocabulary import Vocabulary
-from hdx.hdx_configuration import Configuration
-from hdx.hdx_locations import Locations
 from hdx.location.country import Country
 from hdx.utilities.compare import assert_files_same
 from hdx.utilities.downloader import Download
@@ -93,8 +93,6 @@ class TestUCDP:
             "id",
             "year",
             "active_year",
-            "start_year",
-            "end_year",
             "type_of_violence",
             "conflict_new_id",
             "conflict_name",
@@ -121,8 +119,8 @@ class TestUCDP:
             "geom_wkt",
             "priogrid_gid",
             "country",
-            "country_id",
             "iso3",
+            "country_id",
             "region",
             "event_clarity",
             "date_prec",
@@ -150,18 +148,18 @@ class TestUCDP:
             "gwnoa": "771",
             "side_a": "Government of Bangladesh",
             "side_b_new_id": "285",
-            "gwnob": "",
+            "gwnob": None,
             "side_b": "JSS/SB",
             "number_of_sources": "-1",
             "source_article": 'Reuters (11 May 1990):  "SOLDIERS KILL REBEL COMMANDER, ASSOCIATE IN JUNGLE FIGHT".',
-            "source_office": "",
-            "source_date": "",
-            "source_headline": "",
+            "source_office": None,
+            "source_date": None,
+            "source_headline": None,
             "source_original": "military sources",
             "where_prec": "4",
             "where_coordinates": "Chittagong Division",
             "adm_1": "Chittagong Division",
-            "adm_2": "",
+            "adm_2": None,
             "latitude": "22.916667",
             "longitude": "91.5",
             "geom_wkt": "POINT (91.500000 22.916667)",
