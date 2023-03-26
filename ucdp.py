@@ -90,7 +90,7 @@ def generate_dataset_and_showcase(folder, country, countrydata, headers):
     dataset.set_expected_update_frequency("Every month")
     dataset.set_subnational(True)
     dataset.add_country_location(countryiso)
-    tags = ["hxl", "violence and conflict", "protests", "security incidents"]
+    tags = ["hxl", "conflict-violence"]
     dataset.add_tags(tags)
 
     filename = f"conflict_data_{countryiso}.csv"

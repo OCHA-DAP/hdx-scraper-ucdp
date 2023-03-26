@@ -29,19 +29,11 @@ class TestUCDP:
         "tags": [
             {"name": "hxl", "vocabulary_id": "4e61d464-4943-4e97-973a-84673c1aaa87"},
             {
-                "name": "violence and conflict",
-                "vocabulary_id": "4e61d464-4943-4e97-973a-84673c1aaa87",
-            },
-            {
-                "name": "protests",
-                "vocabulary_id": "4e61d464-4943-4e97-973a-84673c1aaa87",
-            },
-            {
-                "name": "security incidents",
+                "name": "conflict-violence",
                 "vocabulary_id": "4e61d464-4943-4e97-973a-84673c1aaa87",
             },
         ],
-        "dataset_date": "[1989-05-20T00:00:00 TO 2018-12-30T00:00:00]",
+        "dataset_date": "[1989-05-20T00:00:00 TO 2018-12-30T23:59:59]",
     }
 
     resources = [
@@ -74,9 +66,7 @@ class TestUCDP:
         Vocabulary._approved_vocabulary = {
             "tags": [
                 {"name": "hxl"},
-                {"name": "violence and conflict"},
-                {"name": "protests"},
-                {"name": "security incidents"},
+                {"name": "conflict-violence"},
             ],
             "id": "4e61d464-4943-4e97-973a-84673c1aaa87",
             "name": "approved",
@@ -212,15 +202,7 @@ class TestUCDP:
                         "vocabulary_id": "4e61d464-4943-4e97-973a-84673c1aaa87",
                     },
                     {
-                        "name": "violence and conflict",
-                        "vocabulary_id": "4e61d464-4943-4e97-973a-84673c1aaa87",
-                    },
-                    {
-                        "name": "protests",
-                        "vocabulary_id": "4e61d464-4943-4e97-973a-84673c1aaa87",
-                    },
-                    {
-                        "name": "security incidents",
+                        "name": "conflict-violence",
                         "vocabulary_id": "4e61d464-4943-4e97-973a-84673c1aaa87",
                     },
                 ],
