@@ -1,5 +1,6 @@
 ### Collector for UCDP's Datasets
-[![Build Status](https://github.com/OCHA-DAP/hdx-scraper-ucdp/workflows/build/badge.svg)](https://github.com/OCHA-DAP/hdx-scraper-ucdp/actions?query=workflow%3Abuild) [![Coverage Status](https://coveralls.io/repos/github/OCHA-DAP/hdx-scraper-ucdp/badge.svg?branch=main&ts=1)](https://coveralls.io/github/OCHA-DAP/hdx-scraper-ucdp?branch=main)
+[![Run tests](https://github.com/OCHA-DAP/hdx-scraper-ucdp/actions/workflows/run-python-tests.yml/badge.svg)](https://github.com/OCHA-DAP/hdx-scraper-ucdp/actions/workflows/run-python-tests.yml)
+[![Coverage Status](https://coveralls.io/repos/github/OCHA-DAP/hdx-scraper-ucdp/badge.svg?branch=main&ts=1)](https://coveralls.io/github/OCHA-DAP/hdx-scraper-ucdp?branch=main)
 
 This script connects to the [UCDP website](https://ucdp.uu.se/) and reads from the large download of all data creating a dataset per country in HDX. The scraper takes around half an hour to run. It makes 1 large read (<20Mb)) from UCDP and 1000 read/writes (API calls) to HDX in total. It creates temporary files which will be no larger than 20Mb (and mostly much smaller) which it uploads into HDX. It is run every day. 
 
