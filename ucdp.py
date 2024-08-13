@@ -108,7 +108,7 @@ def generate_dataset_and_showcase(folder, country, countrydata, headers):
         "cutdown": 2,
         "cutdownhashtags": ["#date+year", "#adm1+name", "#affected+killed"],
     }
-    success, _ = dataset.generate_resource_from_iterator(
+    success, _ = dataset.generate_resource_from_iterable(
         headers,
         countrydata,
         hxltags,
