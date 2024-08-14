@@ -58,7 +58,7 @@ class TestUCDP:
         Configuration._create(
             user_agent="test",
             hdx_key="12345",
-            project_config_yaml=join("tests", "config", "project_configuration.yml"),
+            project_config_yaml=join("tests", "config", "project_configuration.yaml"),
         )
         Locations.set_validlocations([{"name": "bgd", "title": "Bangladesh"}])
         Country.countriesdata(use_live=False)
