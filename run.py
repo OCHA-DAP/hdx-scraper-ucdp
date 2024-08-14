@@ -37,7 +37,7 @@ def main():
             dataset["notes"] = dataset["notes"].replace(
                 "\n", "  \n"
             )  # ensure markdown has line breaks
-            dataset.generate_resource_view(1)
+            dataset.generate_quickcharts(1)
             dataset.create_in_hdx(
                 remove_additional_resources=True,
                 hxl_update=False,
