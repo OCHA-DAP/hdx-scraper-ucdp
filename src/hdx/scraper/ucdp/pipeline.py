@@ -6,14 +6,16 @@ UCDP:
 Generates HXlated API urls from the UCDP website.
 
 """
+
 import logging
+
+from slugify import slugify
 
 from hdx.data.dataset import Dataset
 from hdx.data.showcase import Showcase
 from hdx.location.country import Country
 from hdx.utilities.dateparse import parse_date
 from hdx.utilities.dictandlist import dict_of_lists_add
-from slugify import slugify
 
 logger = logging.getLogger(__name__)
 hxltags = {
@@ -37,12 +39,12 @@ hxltags = {
 
 
 def get_countriesdata(download_url, downloader):
-    countrynameisomapping = dict()
-    countriesdata = dict()
+    countrynameisomapping = {}
+    countriesdata = {}
     headers, iterator = downloader.get_tabular_rows(
         download_url, headers=1, dict_form=True, format="csv"
     )
-    countries = list()
+    countries = []
     for row in iterator:
         countryname = row["country"]
         countryiso = countrynameisomapping.get(countryname)
