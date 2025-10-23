@@ -3,18 +3,19 @@
 Unit tests for UCDP
 
 """
+
 from os.path import join
 
 import pytest
+
 from hdx.api.configuration import Configuration
 from hdx.api.locations import Locations
 from hdx.data.vocabulary import Vocabulary
 from hdx.location.country import Country
+from hdx.scraper.ucdp.pipeline import generate_dataset_and_showcase, get_countriesdata
 from hdx.utilities.compare import assert_files_same
 from hdx.utilities.downloader import Download
 from hdx.utilities.path import temp_dir
-
-from ucdp import generate_dataset_and_showcase, get_countriesdata
 
 
 class TestUCDP:
@@ -41,15 +42,11 @@ class TestUCDP:
             "name": "Conflict Data for Bangladesh",
             "description": "Conflict data with HXL tags",
             "format": "csv",
-            "resource_type": "file.upload",
-            "url_type": "upload",
         },
         {
             "name": "QuickCharts-Conflict Data for Bangladesh",
             "description": "Cut down data for QuickCharts",
             "format": "csv",
-            "resource_type": "file.upload",
-            "url_type": "upload",
         },
     ]
 
