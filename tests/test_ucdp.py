@@ -28,7 +28,6 @@ class TestUCDP:
         "subnational": "1",
         "groups": [{"name": "bgd"}],
         "tags": [
-            {"name": "hxl", "vocabulary_id": "4e61d464-4943-4e97-973a-84673c1aaa87"},
             {
                 "name": "conflict-violence",
                 "vocabulary_id": "4e61d464-4943-4e97-973a-84673c1aaa87",
@@ -41,11 +40,6 @@ class TestUCDP:
         {
             "name": "Conflict Data for Bangladesh",
             "description": "Conflict data with HXL tags",
-            "format": "csv",
-        },
-        {
-            "name": "QuickCharts-Conflict Data for Bangladesh",
-            "description": "Cut down data for QuickCharts",
             "format": "csv",
         },
     ]
@@ -62,7 +56,6 @@ class TestUCDP:
         Vocabulary._tags_dict = {}
         Vocabulary._approved_vocabulary = {
             "tags": [
-                {"name": "hxl"},
                 {"name": "conflict-violence"},
             ],
             "id": "4e61d464-4943-4e97-973a-84673c1aaa87",
@@ -184,9 +177,6 @@ class TestUCDP:
             assert resources == TestUCDP.resources
             file = "conflict_data_BGD.csv"
             assert_files_same(join("tests", "fixtures", file), join(folder, file))
-            file = "qc_conflict_data_BGD.csv"
-            assert_files_same(join("tests", "fixtures", file), join(folder, file))
-
             assert showcase == {
                 "name": "ucdp-data-for-bangladesh-showcase",
                 "title": "Bangladesh - Data on Conflict Events",
@@ -194,10 +184,6 @@ class TestUCDP:
                 "url": "https://ucdp.uu.se/#country/771",
                 "image_url": "https://pbs.twimg.com/profile_images/832251660718178304/y-LWa5iK_200x200.jpg",
                 "tags": [
-                    {
-                        "name": "hxl",
-                        "vocabulary_id": "4e61d464-4943-4e97-973a-84673c1aaa87",
-                    },
                     {
                         "name": "conflict-violence",
                         "vocabulary_id": "4e61d464-4943-4e97-973a-84673c1aaa87",
