@@ -18,24 +18,6 @@ from hdx.utilities.dateparse import parse_date
 from hdx.utilities.dictandlist import dict_of_lists_add
 
 logger = logging.getLogger(__name__)
-hxltags = {
-    "year": "#date+year",
-    "side_a": "#group+name+first",
-    "side_b": "#group+name+second",
-    "source_article": "#meta+source",
-    "source_headline": "#description",
-    "where_coordinates": "#loc+name",
-    "adm_1": "#adm1+name",
-    "adm_2": "#adm2+name",
-    "latitude": "#geo+lat",
-    "longitude": "#geo+lon",
-    "country": "#country+name",
-    "iso3": "#country+code",
-    "region": "#region+name",
-    "date_start": "#date+start",
-    "date_end": "#date+end",
-    "best": "#affected+killed",
-}
 
 
 def get_countriesdata(download_url, downloader):
@@ -106,19 +88,13 @@ def generate_dataset_and_showcase(folder, country, countrydata, headers):
         enddate = parse_date(row["date_end"])
         return {"startdate": startdate, "enddate": enddate}
 
-    quickcharts = {
-        "cutdown": 2,
-        "cutdownhashtags": ["#date+year", "#adm1+name", "#affected+killed"],
-    }
-    success, _ = dataset.generate_resource_from_iterable(
-        headers,
-        countrydata,
-        hxltags,
+    success, _ = dataset.generate_resource(
         folder,
         filename,
+        countrydata,
         resourcedata,
+        headers,
         date_function=process_dates,
-        quickcharts=quickcharts,
     )
     if success is False:
         logger.warning(f"{countryname} has no data!")
