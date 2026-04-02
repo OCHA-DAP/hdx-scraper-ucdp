@@ -39,7 +39,7 @@ class TestUCDP:
     resources = [
         {
             "name": "Conflict Data for Bangladesh",
-            "description": "Conflict data with HXL tags",
+            "description": "UCDP Georeferenced Event Data",
             "format": "csv",
         },
     ]
